@@ -3,8 +3,12 @@ session_start();
 include "connection.php";
 include "is_login.php";
 if(isset($_POST["submit"])){
-    addData($_POST);
-    var_dump($_POST);
+    if(addData($_POST,$_FILES,null,"data_pelanggan") > 0){
+        echo "<script>
+        alert('Data berhasil ditambah');
+        document.location.href = 'index.php';
+        </script>";
+    }
 }
 
 ?>
@@ -18,7 +22,8 @@ if(isset($_POST["submit"])){
 <body class="bg-[#161B22]">
     <?php include "navbar.php" ?>
     <section class="shadow-md sm:rounded-lg p-10">
-        <form class="max-w-sm mx-auto flex flex-col" action="" method="post">
+        <form class="max-w-md mx-auto flex flex-col p-10 rounded-lg bg-gray-800" action="" method="post" enctype="multipart/form-data">
+            <h1 class="text-3xl font-bold text-white">TAMBAH DATA</h1>
             <label for="nama" class="text-lg font-normal  mb-1 mt-3 text-white">Nama</label>
             <input type="text" id="nama" name="nama" class="bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
         
@@ -33,6 +38,9 @@ if(isset($_POST["submit"])){
             
             <label for="nopol" class="text-lg font-normal  mb-1 mt-3 text-white">Nopol</label>
             <input type="text" id="nopol" name="nopol" class="bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+            
+            <label for="image" class="text-lg font-normal  mb-1 mt-3 text-white">Foto</label>
+            <input type="file" id="image" name="image" class="bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
             
             <label for="barang" class="text-lg font-normal  mb-1 mt-3 text-white">Barang/Sparpart</label>
             <input type="text" id="barang" name="barang" class="bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />

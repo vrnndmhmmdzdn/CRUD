@@ -7,20 +7,19 @@ if(isset($_SESSION["is_login"])){
 }
 
 if(isset($_POST["submit"])){
-    $name = $_POST["name"];
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-    $hashpassword = hash("sha256",$password);
+    $hashpassword = hash("sha256",$_POST["password"]);
+    $akunBaru = [$_POST["name"],$_POST["username"], $hashpassword];
     
-    if(empty($username) || empty($password)){
+    if(empty($akunBaru[1]) || empty($akunBaru[2])){
         $register_message = "Input Tidak Boleh Kosong!";
     }else{
         try{
-            addAccount($name,$username,$hashpassword);
+            addData(null,null,$akunBaru,"akun");
             if(mysqli_affected_rows($connection) > 0){
                 $register_message = "Register Berhasil!";
-                $result = loginAccount($username,$hashpassword);
+                $result = loginAccount($akunBaru[1],$akunBaru[2]);
                 $data = $result->fetch_assoc();
+                $_SESSION["id"] = $data["id"]; 
                 $_SESSION["name"] = $data["nama"]; 
                 $_SESSION["username"] = $data["username"]; 
                 $_SESSION["is_login"] = true;

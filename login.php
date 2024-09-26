@@ -15,6 +15,7 @@ if(isset($_POST["submit"])){
     if($result && $result->num_rows > 0){
         $login_message = "Selamat Datang";
         $data = $result->fetch_assoc();
+        $_SESSION["id"] = $data["id"];
         $_SESSION["name"] = $data["nama"];
         $_SESSION["username"] = $data["username"];
         $_SESSION["is_login"] = true;

@@ -75,6 +75,16 @@ $customers = getData("SELECT * FROM data_pelanggan WHERE id = $id");
             </tr>
             <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    Foto
+                </th>
+                <td class="px-6 py-4">
+                    <div class="max-w-40 aspect-video overflow-hidden flex items-center">
+                        <img src="images/<?= $customer["image"]?>" class="object-cover w-full">
+                    </div>
+                </td>
+            </tr>
+            <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     Barang
                 </th>
                 <td class="px-6 py-4">
@@ -143,7 +153,7 @@ $customers = getData("SELECT * FROM data_pelanggan WHERE id = $id");
         <a href="edit.php?id=<?= $customer["id"]?>" class="px-4 py-2 bg-[#238636] text-white font-semibold rounded-md hover:opacity-90">
             Edit Data
         </a>
-        <a href="edit.php?id=<?= $customer["id"]?>" class="px-4 py-2 bg-[#212830] text-[#F85149] rounded-md font-semibold hover:opacity-90">
+        <a href="delete.php?id=<?= $customer["id"]?>" class="px-4 py-2 bg-[#212830] text-[#F85149] rounded-md font-semibold hover:opacity-90">
             Delete Data
         </a>
     </div>

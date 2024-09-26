@@ -4,7 +4,7 @@ session_start();
 include "is_login.php";
 $id = $_GET["id"];
 
-if(deletedata($id) > 0){
+if(deleteData($id, "data_pelanggan") > 0){
     echo "<script>
     alert('Data Berhasil Dihapus!');
     document.location.href = 'index.php';
@@ -15,6 +15,4 @@ if(deletedata($id) > 0){
     document.location.href = 'index.php';
     </script>";
 }
-
-
 ?>

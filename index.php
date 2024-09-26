@@ -4,6 +4,11 @@ include "connection.php";
 include "is_login.php";
 $customers = getData("SELECT * FROM data_pelanggan");
 
+if(isset($_POST["button"])){
+    $keyword = $_POST["search"];
+    $customers = search($keyword);
+};
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,8 +23,16 @@ $customers = getData("SELECT * FROM data_pelanggan");
     <h1 class="text-3xl text-white font-bold">Selamat Datang, <?= $_SESSION['name']; ?>!</h1>
 </div>
 <section class="relative h-screen overflow-x-auto shadow-md sm:rounded-lg p-10">
-    <a class="py-3 px-5 bg-gray-700 text-white font-semibold rounded-lg hover:opacity-70" href="tambah.php">Tambah +</a>
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mt-5">
+    <div class="w-full justify-between flex flex-row items-start">
+        <a class="py-2 px-5 text-white font-semibold rounded-lg hover:opacity-70 bg-[#238636]" href="tambah.php">Tambah +</a>
+        <form action="" method="post" class="space-x-1 mt-2 relative">
+            <span class="absolute top-1/4 left-4"><i class="ph ph-magnifying-glass text-white"></i></span>
+            <input type="text" name="search"class="pr-3 pl-9 py-1 w-72 bg-[#0D1117] text-white rounded-md border border-gray-500" placeholder="Search">
+                
+            <button type="submit" name="button" class="bg-[#238636] hover:opacity-70 h-fit py-1 px-3 rounded-md text-white hidden">Search</button>
+        </form>
+    </div>
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
@@ -72,14 +85,14 @@ $customers = getData("SELECT * FROM data_pelanggan");
                     </script>
                 </td>
                 <td class="px-6 py-4">
-                    <a href="info.php?id=<?= $customer["id"]?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Lihat</a>
+                    <a href="info.php?id=<?= $customer["id"]?>" class="font-normal text-blue-600 underline hover:opacity-70 ">Lihat</a>
                 </td>
                 <td class="px-6 py-4">
                     <a href="edit.php?id=<?= $customer["id"]?>" class="mr-2">
-                        <i class="ph ph-pencil-simple font-bold text-xl text-blue-600 dark:text-blue-500 hover:underline "></i>
+                        <i class="ph ph-pencil-simple font-bold text-xl text-[#238636] hover:underline hover:opacity-70 "></i>
                     </a>
                     <a href="delete.php?id=<?= $customer["id"]?>">
-                        <i class="ph ph-trash-simple font-bold text-xl text-blue-600 dark:text-blue-500 hover:underline "></i>
+                        <i class="ph ph-trash-simple font-bold text-xl text-[#F85149] hover:underline hover:opacity-70 "></i>
                     </a>
                 </td>
             </tr>

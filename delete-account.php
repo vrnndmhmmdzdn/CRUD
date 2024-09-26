@@ -2,10 +2,11 @@
 include "connection.php";
 session_start();
 include "is_login.php";
-$akun = $_GET["username"];
+$id = $_GET["id"];
 
-
-if(deleteAccount($akun) > 0){
+if(deleteData($id, "akun") > 0){
+    session_unset();
+    session_destroy();
     echo "<script>
     alert('Akun Berhasil Dihapus!,Silahkan Register Ulang');
     document.location.href = 'register.php';
